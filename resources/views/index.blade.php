@@ -1,6 +1,8 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2>商品一覧</h2>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      商品一覧画面
+    </h2>
   </x-slot>
 
   <div class="container">
@@ -46,27 +48,42 @@
         <th>詳細</th>
         <th>削除</th>
       </tr>
+    </thead>
+    <tbody>
+      @foreach($products as $product)
       <tr>
-        <td>{{ $product->id }}</td>
-        <td>
+        <td class="table-data">{{ $product->id }}</td>
+        <td class="table-data">
           @if($product->img_path !=='')
           <img src="{{ asset('storage/'.$product->img_path) }}">
           @else
           <p>no image</p>
           @endif
         </td>
-        <td>{{ $product-> }}</td>
-        <td>{{ $product-> }}</td>
-        <td>{{ $product-> }}</td>
-        <td>{{ $product-> }}</td>
-        <td>{{ $product-> }}</td>
+        <td class="table-data">{{ $product->product_name }}</td>
+        <td class="table-data">{{ $product->price }}</td>
+        <td class="table-data">{{ $product->stock }}</td>
+        <td class="table-data">{{ $product->comment }}</td>
+        <td class="table-data">{{ $product->company_name }}</td>
+        <td class="table-data"><button onclick=""></button>{{ $product->company_name }}</td>
+        <td class="table-data">
+          <form action="{{ route('delete', ['id' => $product->id]) }}">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger delete-button" data-product-id="{{ $product->id }}">削除</button>
+          </form>
+        </td>
+        <td class="table-data">
+          <button class="detail-button" data-product-id="{{ $product->id }}">詳細</button>
+        </td>
       </tr>
-
-      <tbody>
-        @foreach($products as $product)
-      </tbody>
-    </thead>
+      @endforeach
+    </tbody>
   </table>
 
+  {{ $products->links() }}
+
+  <script src="{{ asset(js/delete.js) }}"></script>
+  <script src="{{ asset(js/show.js) }}"></script>
 
 </x-app-layout>

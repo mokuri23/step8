@@ -1,0 +1,1 @@
+htdocs/step7/resources/assets/js/delete.js

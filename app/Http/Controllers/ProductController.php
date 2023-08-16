@@ -15,8 +15,7 @@ class ProductController extends Controller
      */
 
     // 商品一覧画面
-    public function index()
-    {
+    public function index() {
         $product_model = new Product();
         $company_model = new Company();
         $products = $product_model->index();

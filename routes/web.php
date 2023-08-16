@@ -28,4 +28,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/index', [ProductController::class, 'index'])->name('index');
+Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/create', [ProductController::class, 'create'])->name('create');
+Route::post('/store', [ProductController::class, 'store'])->name('store');
+Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('delete');
+Route::get('/show/{id}', [ProductController::class, 'show'])->name('show');
+
+require __DIR__ . '/auth.php';
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
