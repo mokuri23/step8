@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'product_name' => 'required | max:20',
-            'company_name' => 'required',
+            'company_id' => 'required',
             'stock' => 'required | integer | min:0',
             'price' => 'required | integer | min:0',
             'comment' => 'max:1000',
@@ -36,9 +36,11 @@ class ProductRequest extends FormRequest
     {
         return [
             'product_name' => '商品名',
-            'company_name' => 'メーカー名',
+            'company_id' => 'メーカー名',
             'stock' => '在庫数',
             'price' => '価格',
+            'comment' => 'コメント',
+
         ];
     }
 

@@ -17,18 +17,20 @@
 
         <div class="form">
           <label>価格</label>
-          <input type="number" class="input" id="price" name="price" value="price">
+          <input type="number" class="input" id="price" name="price">
         </div>
 
         <div class="form">
           <label>在庫数</label>
-          <input type="number" class="input" id="stock" name="stock" value="stock">
+          <input type="number" class="input" id="stock" name="stock">
         </div>
 
         <div class="form">
           <label>メーカー</label>
           <select name="company_id" id="company">
             <option value="">選択してください</option>
+            <option value="コカコーラ">コカコーラ</option>
+            <option value="キリン">キリン</option>
             @foreach($companies as $company)
             <option value="{{ $company->id }}">{{ $company->company_name }}</option>
             @endforeach
@@ -45,7 +47,7 @@
           <input type="file" name="img_path" id="img_path">
         </div>
         <div>
-          <button type="submit" class="btn">登録</button>
+          <button type="submit" class="btn">新規登録</button>
         </div>
 
         <div>

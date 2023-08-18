@@ -6,7 +6,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Company;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 
 
@@ -152,5 +154,26 @@ class ProductController extends Controller
         }
 
         return redirect()->route('index')->with('success', config('message.delete_success'));
+    }
+
+    // 検索
+    public function search(Request $request)
+    {
+        $search_product = $request->input('keyword');
+        $search_company = $request->input('company');
+        DB::beginTransaction();
+
+        try {
+            $product_model = new Product();
+            $company_model = new Company();
+            $companies = $company_model->index();
+            $products = $product_model->getProductSearch($search_product, $search_company);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
+
+        return view('index', ['products' => $products, 'companies' => $companies]);
     }
 }

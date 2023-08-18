@@ -40,6 +40,11 @@
         <img src="{{ asset('storage/image/' .$product->img_path) }}" class="img">
       </div>
 
+      <form action="{{ route('edit', ['id' => $product->id] }}" method="get">
+        <button type="submit" class="btn">編集</button>
+      </form>
+
+
       <div class="back-page">
         <form action="{{ route('index') }}" method="get">
           <button type="submit" class="back-btn">戻る</button>

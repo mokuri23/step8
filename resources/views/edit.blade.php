@@ -7,7 +7,7 @@
   <!-- 編集フォーム -->
   <div class="create-container">
     <div class="wrapper">
-      <form action="{{ route('update', ['id' => $product->id ]) }}" enctype="multipart/form-data">
+      <form method="post" action="{{ route('update', ['id' => $product->id ]) }}" enctype="multipart/form-data">
         @csrf
         <div class="form">
           <div>ID : {{ $product->id }}</div>
