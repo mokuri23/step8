@@ -20,7 +20,7 @@
         <div class="form">
           <label>メーカー</label>
           <select name="company_id" id="company">
-            <option value=""></option>
+            <option value="">選択してください</option>
             @foreach($companies as $company)
             <option value="{{ $company->id }}" {{ $company->id == $product->company_id ? 'selected' : '' }}>
               {{ $company->company_name }}
@@ -42,7 +42,7 @@
 
         <div class="form">
           <label>コメント</label>
-          <textarea name="comment" cols="30" rows="10">{{ $product->comment }}</textarea>
+          <textarea name="comment" cols="20" rows="5">{{ $product->comment }}</textarea>
         </div>
 
         <div class="form">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,17 +29,26 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// 一覧画面
 Route::get('/index', [ProductController::class, 'index'])->name('index');
-Route::get('/search', [ProductController::class, 'search'])->name('search');
+// 新規登録画面
 Route::get('/create', [ProductController::class, 'create'])->name('create');
+// 登録
 Route::post('/store', [ProductController::class, 'store'])->name('store');
+// 編集画面
 Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
-Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('delete');
+// 詳細画面
 Route::get('/show/{id}', [ProductController::class, 'show'])->name('show');
+// 更新
+Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
+// 削除
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('delete');
+// 検索
+Route::get('/search', [ProductController::class, 'search'])->name('search');
+
 
 require __DIR__ . '/auth.php';
 
-// Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
