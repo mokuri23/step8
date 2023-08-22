@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      編集画面
+      新規登録画面
     </h2>
   </x-slot>
 
@@ -12,17 +12,17 @@
         @csrf
         <div class="form">
           <label>商品名</label>
-          <input type="text" class="input" id="name" name="product_name" value="product_name">
+          <input type="text" class="input" id="name" name="product_name" value="{{ old('product_name') }}">
         </div>
 
         <div class="form">
           <label>価格</label>
-          <input type="number" class="input" id="price" name="price">
+          <input type="number" class="input" id="price" name="price" value="{{ old('price') }}">
         </div>
 
         <div class="form">
           <label>在庫数</label>
-          <input type="number" class="input" id="stock" name="stock">
+          <input type="number" class="input" id="stock" name="stock" value="{{ old('stock') }}">
         </div>
 
         <div class="form">
@@ -39,7 +39,7 @@
 
         <div class="form">
           <label>コメント</label>
-          <textarea name="comment" cols="20" rows="5"></textarea>
+          <textarea name="comment" cols="20" rows="5" value="{{ old('comment') }}"></textarea>
         </div>
 
         <div class="form">
@@ -64,10 +64,8 @@
   </div>
 
   <div class="back-page">
-    <form action="{{ route('index') }}" method="get">
-      <button type="submit" class="back-btn">戻る</button>
-    </form>
+    <!-- <button class="back-btn" onclick="location.href='{{ route('index') }}'">戻る</button> -->
+    <a href="{{ route('index') }}" class="btn btn-secondary">戻る</a>
   </div>
-
 
 </x-app-layout>

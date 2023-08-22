@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 
 
+
 class ProductController extends Controller
 {
     /**
@@ -39,8 +40,7 @@ class ProductController extends Controller
     //  新規登録画面
     public function create()
     {
-        $company_model = new Company();
-        $companies = $company_model->index();
+        $companies = Company::all();
         return view('create', ['companies' => $companies]);
     }
 
@@ -66,9 +66,10 @@ class ProductController extends Controller
             DB::rollback();
             return back();
         }
-
         return redirect()->route('index')->with('success', config('message.create_success'));
     }
+
+
 
     /**
      * Display the specified resource.

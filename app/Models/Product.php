@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Kyslik\ColumnSortable\Sortable;
+// use Kyslik\ColumnSortable\Sortable;
 
 
 class Product extends Model
 {
 
-    use Sortable;
-    public $sortableAs = ['company_name'];
+    // use Sortable;
+    // public $sortableAs = ['company_name'];
 
     use HasFactory;
     protected $table = 'products';
@@ -37,6 +37,7 @@ class Product extends Model
             ->join('companies', 'products.company_id', '=', 'companies.id')
             ->select('products.*', 'companies.company_name')
             ->paginate(10);
+        // ->get();
         return $products;
     }
 
@@ -111,6 +112,6 @@ class Product extends Model
             $products->where('companies.id', $searchCompany);
         }
 
-        return $products->paginate(5);
+        return $products->paginate(10);
     }
 }
