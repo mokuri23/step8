@@ -17,24 +17,25 @@
         </select>
         <div class="keyword">
           <input type="text" class="keyword-box" name="keyword" id="keyword" placeholder="Type to Search">
-          <button type="submit" alt="検索"></button>
+          <button type="submit" alt="検索" class="search-btn">検索</button>
         </div>
       </div>
     </form>
-  </div>
+    <!-- 新規登録ボタン -->
+    <div class="search-container">
+      <button onclick="location.href='./create'" class="btn new-create-btn">登録</button>
 
-  <!-- 新規登録ボタン -->
-  <div class="container">
-    <button onclick="location.href='./create'" class="btn create-btn">登録</button>
-
-    <div class="alert">
-      @if(session('success'))
-      <div class="alert alert-success">
-        {{ session('success') }}
+      <div class="alert">
+        @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div>
+        @endif
       </div>
-      @endif
     </div>
   </div>
+
+
 
   <!-- 商品一覧 -->
   <div class="table index-table">

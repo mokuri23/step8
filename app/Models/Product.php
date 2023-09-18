@@ -96,7 +96,7 @@ class Product extends Model
     public function getProductSearch($searchProduct, $searchCompany)
     {
         $products = DB::table('products')
-            ->join('companies', 'products.company_id', '_', 'companies.id')
+            ->join('companies', 'products.company_id', '=', 'companies.id')
             ->select('products.*', 'companies.company_name');
 
         if (!empty($searchProduct)) {

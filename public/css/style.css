@@ -39,7 +39,49 @@ td .img {
   text-align: center;
 }
 
+.container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.select {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.keyword {
+  margin-left: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* ボタンレイアウト */
+.search-btn {
+  height: 42px;
+  width: 80px;
+  background-color: #d2d5d3 !important;
+  color: #000000;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.new-create-btn {
+  width: 80px;
+  background-color: #57ce7d !important;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 8px 0;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .create-btn {
   width: 80px;
   background-color: #57ce7d !important;
@@ -118,3 +160,14 @@ td .img {
   justify-content: space-around;
 }
 
+/* show */
+.show-container {
+  display: flex;
+  justify-content: center;
+}
+
+.show-back-page {
+  margin-top: 40px;
+  display: flex;
+  justify-content:space-evenly;
+}

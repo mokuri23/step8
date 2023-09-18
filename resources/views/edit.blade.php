@@ -54,24 +54,22 @@
           <img src="{{ asset('storage/image/' . $product->img_path) }}" class="img">
         </div>
 
-        <div>
-          <button type="submit" class="create-btn">更新</button>
-        </div>
-
-        <div>
-          @if ($errors->any())
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-          @endif
-        </div>
         <div class="back-page">
-          <button class="blue-btn" onclick="location.href = '{{ route('index') }}'">
-            戻る
-          </button>
+          <button type="submit" class="create-btn">更新</button>
+
+          <div>
+            @if ($errors->any())
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+            @endif
+          </div>
         </div>
+      </form>
+      <form action="{{ route('show', ['id' => $product->id]) }}" method="get">
+        <button type="submit" class="blue-btn">戻る</button>
       </form>
     </div>
   </div>
