@@ -25,7 +25,7 @@
 
   <!-- 新規登録ボタン -->
   <div class="container">
-    <button onclick="location.href='./create'" class="btn">新規登録</button>
+    <button onclick="location.href='./create'" class="btn create-btn">登録</button>
 
     <div class="alert">
       @if(session('success'))
@@ -37,8 +37,8 @@
   </div>
 
   <!-- 商品一覧 -->
-  <div class="table-container">
-    <table class="table">
+  <div class="table index-table">
+    <table class="table-container">
       <thead>
         <tr>
           <th>商品ID</th>
@@ -55,34 +55,33 @@
 
       <tbody>
         @foreach($products as $product)
-        <tr>
-          <td>{{ $product->id }}</td>
-          <td>
-            @if($product->img_path !=='')
-            <img src="{{ asset('storage/' . $product->img_path) }}">
-            @else
-            <p>no image</p>
-            @endif
+        <tr class="table-form">
+          <td class="table-data">{{ $product->id }}</td>
+          <td class="table-data">
+            <img width="50px" src="{{ asset('storage/image/' . $product->img_path) }}" />
           </td>
-          <td>{{ $product->product_name }}</td>
-          <td>{{ $product->price }}</td>
-          <td>{{ $product->stock }}</td>
-          <td>{{ $product->company_name }}</td>
+          <td class="table-data">{{ $product->product_name }}</td>
+          <td class="table-data">￥{{ $product->price }}</td>
+          <td class="table-data">{{ $product->stock }}</td>
+          <td class="table-data">{{ $product->comment }}</td>
+          <td class="table-data">{{ $product->company_name }}</td>
           <td>
-            <button type="button" class="btn btn-primary" onclick="location.href='/product/edit/{{ $product->id }}' ">編集</button>
+            <a href="{{ route('show', ['id' => $product->id]) }}" class="btn blue-btn">詳細</a>
+            <!-- <button type="button" class="blue-btn" onclick="location.href='{{ route('show', ['id' => $product->id]) }}'">詳細</button> -->
           </td>
           <td>
             <form method="post" action="{{ route('delete',['id' => $product->id]) }}">
               @csrf
               @method('DELETE')
-              <button type="submit" onclick="return confirm('削除しますか？');">削除</button>
+              <a href="{{ route('delete',['id' => $product->id]) }}" class="delete-btn" onclick="return confirm('削除しますか？');">削除</a>
+              <!-- <button type="submit" class="delete-btn" onclick="return confirm('削除しますか？');">削除</button> -->
             </form>
           </td>
         </tr>
         @endforeach
       </tbody>
     </table>
-    <!-- {{ $products->links() }} -->
+    {{ $products->links() }}
   </div>
 
 

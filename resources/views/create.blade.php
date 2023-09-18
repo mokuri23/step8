@@ -16,7 +16,7 @@
         </div>
 
         <div class="form">
-          <label>価格</label>
+          <label>価　格</label>
           <input type="number" class="input" id="price" name="price" value="{{ old('price') }}">
         </div>
 
@@ -29,8 +29,6 @@
           <label>メーカー</label>
           <select name="company_id" id="company">
             <option value="">選択してください</option>
-            <option value="コカコーラ">コカコーラ</option>
-            <option value="キリン">キリン</option>
             @foreach($companies as $company)
             <option value="{{ $company->id }}">{{ $company->company_name }}</option>
             @endforeach
@@ -39,15 +37,16 @@
 
         <div class="form">
           <label>コメント</label>
-          <textarea name="comment" cols="20" rows="5" value="{{ old('comment') }}"></textarea>
+          <textarea name="comment" cols="20" rows="3" value="{{ old('comment') }}"></textarea>
         </div>
 
         <div class="form">
           <label>商品画像</label>
           <input type="file" name="img_path" id="img_path">
         </div>
+
         <div>
-          <button type="submit" class="btn">新規登録</button>
+          <button class="create-btn" type="submit">登録</button>
         </div>
 
         <div>
@@ -60,12 +59,9 @@
           @endif
         </div>
       </form>
+      <button class="blue-btn" onclick="location.href='{{ route('index') }}'">戻る</button>
     </div>
   </div>
 
-  <div class="back-page">
-    <!-- <button class="back-btn" onclick="location.href='{{ route('index') }}'">戻る</button> -->
-    <a href="{{ route('index') }}" class="btn btn-secondary">戻る</a>
-  </div>
 
 </x-app-layout>

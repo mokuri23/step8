@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 
 
+
 class ProductController extends Controller
 {
     /**
@@ -83,6 +84,7 @@ class ProductController extends Controller
     {
         $product_model = new Product();
         $product = $product_model->detail($id);
+
         return view('show', ['product' => $product]);
     }
 
@@ -127,7 +129,7 @@ class ProductController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return back();
+            return back()->with('error', '更新中にエラーが発生しました。');
         }
 
         return redirect()->route('index')->with('success', config('message.update_success'));

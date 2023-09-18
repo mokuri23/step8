@@ -4,3 +4,117 @@
   box-sizing: border-box;
 }
 
+/* index */
+.index-table {
+  padding: 0 60px;
+}
+.table-container {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+
+.table-form:nth-child(odd) {
+  background-color: #eeeded;
+}
+
+.table-form:nth-child(even) {
+  background-color: #ffffff;
+}
+
+
+th {
+  text-align: center;
+  padding: 10px;
+}
+
+td {
+  text-align: center;
+  padding: 5px;
+}
+
+td .img {
+  max-width: 70px;
+  max-height: 50px;
+  text-align: center;
+}
+
+/* ボタンレイアウト */
+.create-btn {
+  width: 80px;
+  background-color: #57ce7d !important;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-btn:hover {
+  background-color: #498d5e;
+}
+
+.blue-btn {
+  width: 80px;
+  background-color: #438ec7 !important;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blue-btn:hover {
+  background-color: #32729b;
+}
+
+.delete-btn {
+  width: 80px;
+  background-color: #d73a3a;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn:hover {
+  background-color: #e71c1c;
+}
+
+/* create */
+.create-container {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 50%;
+  padding: 20px 0;
+  margin: 20px 0;
+  border: 0.5px solid #000000;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-around;
+}
+

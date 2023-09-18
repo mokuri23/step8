@@ -14,6 +14,10 @@
           <th>商品ID</th>
           <td>No.{{ $product->id }}</td>
         </tr>
+        <th>商品画像</th>
+        <td>
+          <img src="{{ asset('storage/image/' .$product->img_path) }}" class="img">
+        </td>
         <tr>
           <th>商品名</th>
           <td>{{ $product->product_name }}</td>
@@ -36,18 +40,13 @@
         </tr>
       </table>
 
-      <div>
-        <img src="{{ asset('storage/image/' .$product->img_path) }}" class="img">
-      </div>
-
-      <form action="{{ route('edit', ['id' => $product->id] }}" method="get">
-        <button type="submit" class="btn">編集</button>
-      </form>
-
-
       <div class="back-page">
+        <form action="{{ route('edit', ['id' => $product->id]) }}" method="get">
+          <button type="submit" class="create-btn">編集</button>
+        </form>
+
         <form action="{{ route('index') }}" method="get">
-          <button type="submit" class="back-btn">戻る</button>
+          <button type="submit" class="blue-btn">戻る</button>
         </form>
       </div>
     </div>

@@ -5,14 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-// use Kyslik\ColumnSortable\Sortable;
 
 
 class Product extends Model
 {
-
-    // use Sortable;
-    // public $sortableAs = ['company_name'];
 
     use HasFactory;
     protected $table = 'products';
@@ -37,7 +33,6 @@ class Product extends Model
             ->join('companies', 'products.company_id', '=', 'companies.id')
             ->select('products.*', 'companies.company_name')
             ->paginate(10);
-        // ->get();
         return $products;
     }
 
@@ -72,7 +67,7 @@ class Product extends Model
     }
 
     // 更新
-    public function updateDate($id, $data, $img_path)
+    public function updateData($id, $data, $img_path)
     {
         $products = Product::find($id);
         $products->product_name = $data['product_name'];

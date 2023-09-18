@@ -14,7 +14,7 @@
         </div>
         <div class="form">
           <label>商品名</label>
-          <input type="text" name="product" id="product" value="{{ $product->product_name }}" class="input">
+          <input type="text" name="product_name" id="name" value="{{ $product->product_name }}" class="input">
         </div>
 
         <div class="form">
@@ -51,11 +51,11 @@
 
         <div class="form">
           <label>商品画像</label>
-          <img src="{{ asset('storage/image' .$product->img_path) }}" class="img">
+          <img src="{{ asset('storage/image/' . $product->img_path) }}" class="img">
         </div>
 
         <div>
-          <button type="submit" class="btn">更新</button>
+          <button type="submit" class="create-btn">更新</button>
         </div>
 
         <div>
@@ -67,14 +67,15 @@
           </ul>
           @endif
         </div>
+        <div class="back-page">
+          <button class="blue-btn" onclick="location.href = '{{ route('index') }}'">
+            戻る
+          </button>
+        </div>
       </form>
     </div>
   </div>
 
-  <div class="back-page">
-    <form action="{{ route('index') }}" method="get">
-      <button type="submit" class="back-btn">戻る</button>
-    </form>
-  </div>
+
 
 </x-app-layout>
