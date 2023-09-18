@@ -45,8 +45,9 @@
           <input type="file" name="img_path" id="img_path">
         </div>
 
-        <div>
+        <div class="create-back-page">
           <button class="create-btn" type="submit">登録</button>
+          <a href="{{ route('index') }}" class="blue-btn">戻る</a>
         </div>
 
         <div>
@@ -59,7 +60,7 @@
           @endif
         </div>
       </form>
-      <button class="blue-btn" onclick="location.href='{{ route('index') }}'">戻る</button>
+      <!-- <button class="blue-btn" onclick="location.href='{{ route('index') }}'">戻る</button> -->
     </div>
   </div>
 

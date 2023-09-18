@@ -40,7 +40,7 @@
         </tr>
       </table>
 
-      <div class="show-back-page">
+      <div class="back-page">
         <form action="{{ route('edit', ['id' => $product->id]) }}" method="get">
           <button type="submit" class="create-btn">編集</button>
         </form>

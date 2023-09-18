@@ -56,6 +56,7 @@
 
         <div class="back-page">
           <button type="submit" class="create-btn">更新</button>
+          <a href="{{ route('show', ['id' => $product->id]) }}" class="blue-btn">戻る</a>
 
           <div>
             @if ($errors->any())
@@ -68,9 +69,9 @@
           </div>
         </div>
       </form>
-      <form action="{{ route('show', ['id' => $product->id]) }}" method="get">
+      <!-- <form action="{{ route('show', ['id' => $product->id]) }}" method="get">
         <button type="submit" class="blue-btn">戻る</button>
-      </form>
+      </form> -->
     </div>
   </div>
 
