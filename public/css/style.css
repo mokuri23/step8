@@ -59,10 +59,27 @@ td .img {
 }
 
 /* ボタンレイアウト */
+/* .red-btn {
+  width: 80px;
+  background-color: #da4a4a !important;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.red-btn:hover {
+  background-color: #e71c1c;
+} */
+
 .search-btn {
   height: 42px;
   width: 80px;
-  background-color: #d2d5d3 !important;
+  background-color: #e71c1c !important;
   color: #000000;
   border: none;
   padding: 5px 10px;
@@ -115,22 +132,6 @@ td .img {
   background-color: #32729b;
 }
 
-.delete-btn {
-  width: 80px;
-  background-color: #d73a3a;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.delete-btn:hover {
-  background-color: #e71c1c;
-}
 
 /* create */
 .create-container {

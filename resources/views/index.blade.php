@@ -68,14 +68,12 @@
           <td class="table-data">{{ $product->company_name }}</td>
           <td>
             <a href="{{ route('show', ['id' => $product->id]) }}" class="btn blue-btn">詳細</a>
-            <!-- <button type="button" class="blue-btn" onclick="location.href='{{ route('show', ['id' => $product->id]) }}'">詳細</button> -->
           </td>
           <td>
             <form method="post" action="{{ route('delete',['id' => $product->id]) }}">
               @csrf
               @method('DELETE')
-              <a href="{{ route('delete',['id' => $product->id]) }}" class="delete-btn" onclick="return confirm('削除しますか？');">削除</a>
-              <!-- <button type="submit" class="delete-btn" onclick="return confirm('削除しますか？');">削除</button> -->
+              <button type="submit" class="btn create-btn" onclick="return confirm('削除しますか？');">削除</button>
             </form>
           </td>
         </tr>

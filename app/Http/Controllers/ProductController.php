@@ -164,7 +164,7 @@ class ProductController extends Controller
     {
         $search_product = $request->input('keyword');
         $search_company = $request->input('company');
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         try {
             $product_model = new Product();
