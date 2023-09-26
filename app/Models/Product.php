@@ -109,4 +109,25 @@ class Product extends Model
 
         return $products->paginate(10);
     }
+
+    public function scopeFilterByPriceAndStock($query, $min_price, $max_price, $min_stock, $max_stock)
+    {
+        if ($min_price) {
+            $query->where('price', '>=', $min_price);
+        }
+
+        if ($max_price) {
+            $query->where('price', '<=', $max_price);
+        }
+
+        if ($min_stock) {
+            $query->where('stock', '>=', $min_stock);
+        }
+
+        if ($max_stock) {
+            $query->where('stock', '<=', $max_stock);
+        }
+
+        return $query;
+    }
 }

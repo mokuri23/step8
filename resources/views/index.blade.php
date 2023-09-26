@@ -20,6 +20,26 @@
           <button type="submit" alt="検索" class="search-btn">検索</button>
         </div>
       </div>
+
+      <!-- 価格フォーム -->
+      <div class="price-range">
+        <label for="min_price">最低価格:</label>
+        <input type="number" class="price-box" name="min_price" id="min_price">~
+        <label for="number">最高価格:</label>
+        <input type="number" class="price_box" name="max_price" id="max_price">
+      </div>
+
+      <!-- 在庫フォーム -->
+      <div class="stock-range">
+        <label for="min_stock">最低在庫数:</label>
+        <input type="number" class="stock-box" name="min_stock" id="min_stock">~
+        <label for="max_stock">在校在庫数:</label>
+        <input type="number" class="stock-box" name="max_stock" id="max_stock">
+      </div>
+
+      <!-- 検索ボタン -->
+      <button type="submit" alt="検索" class="search-btn">検索</button>
+
     </form>
     <!-- 新規登録ボタン -->
     <div class="search-container">

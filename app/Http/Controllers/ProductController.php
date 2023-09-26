@@ -164,13 +164,17 @@ class ProductController extends Controller
     {
         $search_product = $request->input('keyword');
         $search_company = $request->input('company');
+        $min_price = $request->input('min_price');
+        $max_price = $request->input('max_price');
+        $min_stock = $request->input('min_stock');
+        $max_stock = $request->input('max_stock');
         // DB::beginTransaction();
 
         try {
             $product_model = new Product();
             $company_model = new Company();
             $companies = $company_model->index();
-            $products = $product_model->getProductSearch($search_product, $search_company);
+            $products = $product_model->getProductSearch($search_product, $search_company, $min_price, $max_price, $min_stock, $max_stock);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
