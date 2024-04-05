@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 
+
 class Product extends Model
 {
 
@@ -66,6 +67,7 @@ class Product extends Model
         return $products;
     }
 
+
     // 更新
     public function updateData($id, $data, $img_path)
     {
@@ -93,41 +95,37 @@ class Product extends Model
     }
 
     // 検索
-    public function getProductSearch($searchProduct, $searchCompany)
+    public function getProductSearch($searchProduct, $searchCompany, $min_price, $max_price, $min_stock, $max_stock)
     {
         $products = DB::table('products')
             ->join('companies', 'products.company_id', '=', 'companies.id')
             ->select('products.*', 'companies.company_name');
 
-        if (!empty($searchProduct)) {
+        if ($searchProduct) {
             $products->where('product_name', 'like', '%' . $searchProduct . '%');
         }
 
-        if (!empty($searchCompany)) {
+        if ($searchCompany) {
             $products->where('companies.id', $searchCompany);
         }
 
-        return $products->paginate(10);
-    }
 
-    public function scopeFilterByPriceAndStock($query, $min_price, $max_price, $min_stock, $max_stock)
-    {
         if ($min_price) {
-            $query->where('price', '>=', $min_price);
+            $products->where('products.price', '>=', $min_price);
         }
 
         if ($max_price) {
-            $query->where('price', '<=', $max_price);
+            $products->where('products.price', '<=', $max_price);
         }
 
         if ($min_stock) {
-            $query->where('stock', '>=', $min_stock);
+            $products->where('products.stock', '>=', $min_stock);
         }
 
         if ($max_stock) {
-            $query->where('stock', '<=', $max_stock);
+            $products->where('products.stock', '<=', $max_stock);
         }
 
-        return $query;
+        return $products->paginate(10);
     }
 }

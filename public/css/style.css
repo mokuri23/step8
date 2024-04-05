@@ -12,6 +12,10 @@
   width: 100%;
   border-collapse: collapse;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .table-form:nth-child(odd) {

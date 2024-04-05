@@ -6,77 +6,69 @@
   </x-slot>
 
   <div class="container">
-    <form action="{{ route('search') }}" method="GET" enctype="multipart/form-data">
+    <form action="{{ route('search') }}" method="GET" enctype="multipart/form-data" id="search" class="search-form">
       @csrf
-      <div class="select">
-        <select name="company" id="company" class="select-company" type="button">
+      <div class="box">
+        <label class="label">メーカー選択</label>
+        <select name="company" class="select-box">
           <option value="">All categories</option>
           @foreach($companies as $company)
           <option value="{{ $company->id }}">{{ $company->company_name }}</option>
           @endforeach
         </select>
-        <div class="keyword">
-          <input type="text" class="keyword-box" name="keyword" id="keyword" placeholder="Type to Search">
-          <button type="submit" alt="検索" class="search-btn">検索</button>
-        </div>
+
+        <label class="label">キーワード</label>
+        <input type="text" class="keyword-box" name="keyword" id="keyword" placeholder="Type to Search">
       </div>
 
       <!-- 価格フォーム -->
       <div class="price-range">
-        <label for="min_price">最低価格:</label>
-        <input type="number" class="price-box" name="min_price" id="min_price">~
-        <label for="number">最高価格:</label>
-        <input type="number" class="price_box" name="max_price" id="max_price">
+        <label class="label">価格</label>
+        ￥<input type="text" class="min_price" name="min_price" placeholder="下限価格">〜
+        ￥<input type="text" class="max_price" name="max_price" placeholder="上限価格">
+        <!-- 在庫フォーム -->
+        <label class="label">在庫数</label>
+        <input type="text" class="min_stock" name="min_stock" placeholder="下限在庫数">個〜
+        <input type="text" class="max_stock" name="max_stock" placeholder="上限在庫数">個
+
+        <!-- 検索ボタン -->
+        <button type="button" id="search-button" class="search-btn">検索</button>
       </div>
-
-      <!-- 在庫フォーム -->
-      <div class="stock-range">
-        <label for="min_stock">最低在庫数:</label>
-        <input type="number" class="stock-box" name="min_stock" id="min_stock">~
-        <label for="max_stock">在校在庫数:</label>
-        <input type="number" class="stock-box" name="max_stock" id="max_stock">
-      </div>
-
-      <!-- 検索ボタン -->
-      <button type="submit" alt="検索" class="search-btn">検索</button>
-
     </form>
-    <!-- 新規登録ボタン -->
-    <div class="search-container">
-      <button onclick="location.href='./create'" class="btn new-create-btn">登録</button>
-
-      <div class="alert">
-        @if(session('success'))
-        <div class="alert alert-success">
-          {{ session('success') }}
-        </div>
-        @endif
-      </div>
+  </div>
+  <!-- 新規登録ボタン -->
+  <div class="container" id="message-box">
+    <button onclick="location.href='./create'" class="btn new-create-btn">登録</button>
+    @if(session('success'))
+    <div class="alert alert-success">
+      {{ session('success') }}
     </div>
+    @endif
   </div>
 
 
 
+
   <!-- 商品一覧 -->
-  <div class="table index-table">
-    <table class="table-container">
+  <div class="table-container" id="table">
+    <table class="table tablesorter">
       <thead>
         <tr>
-          <th>商品ID</th>
-          <th>商品画像</th>
-          <th>商品名</th>
-          <th>価格</th>
-          <th>在庫数</th>
-          <th>コメント</th>
-          <th>メーカー名</th>
-          <th></th>
-          <th></th>
+          <th scope="col" class="table-header" data-sort="numeric">商品ID</th>
+          <th scope="col" class="table-header" data-sort="numeric">商品画像</th>
+          <th scope="col" class="table-header" data-sort="numeric">商品名</th>
+          <th scope="col" class="table-header" data-sort="numeric">価格</th>
+          <th scope="col" class="table-header" data-sort="numeric">在庫数</th>
+          <th scope="col" class="table-header" data-sort="numeric">コメント</th>
+          <th scope="col" class="table-header" data-sort="numeric">メーカー名</th>
+          <th scope="col" class="table-header" data-sort="numeric"></th>
+          <th scope="col" class="table-header" data-sort="numeric"></th>
         </tr>
       </thead>
 
       <tbody>
         @foreach($products as $product)
-        <tr class="table-form">
+        <tr class="table-form" data-id="{{ $product->id }}">
           <td class="table-data">{{ $product->id }}</td>
           <td class="table-data">
             <img width="50px" src="{{ asset('storage/image/' . $product->img_path) }}" />
@@ -86,24 +78,21 @@
           <td class="table-data">{{ $product->stock }}</td>
           <td class="table-data">{{ $product->comment }}</td>
           <td class="table-data">{{ $product->company_name }}</td>
-          <td>
+          <td class="table-data">
             <a href="{{ route('show', ['id' => $product->id]) }}" class="btn blue-btn">詳細</a>
+            <form class="del-form" method="post" action="{{ route('delete',['id' => $product->id]) }}">
+              @csrf
+              <!-- @method('DELETE') -->
+              <button data-id="{{ $product->id }}" type="submit" class="btn create-btn">削除</button>
+            </form>
           </td>
           <td>
-            <form method="post" action="{{ route('delete',['id' => $product->id]) }}">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn create-btn" onclick="return confirm('削除しますか？');">削除</button>
-            </form>
+            <a href="{{ route('cart', ['id' => $product->id]) }}" class="btn">購入</a>
           </td>
         </tr>
         @endforeach
       </tbody>
     </table>
-    {{ $products->links() }}
+    {{ $products->appends(request()->query())->links() }}
   </div>
-
-
-
-
 </x-app-layout>

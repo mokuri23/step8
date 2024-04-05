@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Company;
+use App\Models\Sale;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +42,8 @@ class ProductController extends Controller
     //  新規登録画面
     public function create()
     {
-        $companies = Company::all();
+        $company_model = new Company();
+        $companies = $company_model->index();
         return view('create', ['companies' => $companies]);
     }
 
@@ -63,11 +65,10 @@ class ProductController extends Controller
             $product_model = new Product();
             $product_model->store($data, $img_path);
             DB::commit();
+            return redirect()->route('index')->with('success', config('message.create_success'));
         } catch (\Exception $e) {
-            DB::rollback();
-            return back();
+            return redirect()->route('index')->with('success', config('message.create_fail'));
         }
-        return redirect()->route('index')->with('success', config('message.create_success'));
     }
 
 
@@ -127,12 +128,10 @@ class ProductController extends Controller
             $product_model = new Product();
             $product_model->updateData($id, $data, $img_path);
             DB::commit();
+            return redirect()->route('index')->with('success', config('message.update_success'));
         } catch (\Exception $e) {
-            DB::rollback();
-            return back()->with('error', '更新中にエラーが発生しました。');
+            return redirect()->route('index')->with('success', config('message.update_fail'));
         }
-
-        return redirect()->route('index')->with('success', config('message.update_success'));
     }
 
     /**
@@ -151,12 +150,14 @@ class ProductController extends Controller
             $model = new Product();
             $product = $model->deleteProduct($id);
             DB::commit();
+            return response()->json([
+                'message' => config('message.delete_success')
+            ]);
         } catch (\Exception $e) {
-            DB::rollback();
-            return back();
+            return response()->json([
+                'message' => config('message.delete_fail')
+            ]);
         }
-
-        return redirect()->route('index')->with('success', config('message.delete_success'));
     }
 
     // 検索
@@ -168,7 +169,7 @@ class ProductController extends Controller
         $max_price = $request->input('max_price');
         $min_stock = $request->input('min_stock');
         $max_stock = $request->input('max_stock');
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $product_model = new Product();
@@ -178,9 +179,38 @@ class ProductController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            return response()->json(['error' => '検索中にエラーが発生しました。']);
+            // return back();
+        }
+
+
+        return response()->json(['$products' => $products, 'companies' => $companies]);
+    }
+
+    // 購入
+    public function cart($id)
+    {
+        $sale_model = new Sale();
+        $product = $sale_model->detail($id);
+        return view('cart', ['product' => $product]);
+    }
+
+    public function purchase(Request $request, $id)
+    {
+        $quantity = $request->input('quantity');
+        DB::beginTransaction();
+
+        try {
+            $sale_model = new Sale();
+            $message = $sale_model->purchase($quantity, $id);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
             return back();
         }
 
-        return view('index', ['products' => $products, 'companies' => $companies]);
+        return response()->json([
+            'message' => $message
+        ]);
     }
 }

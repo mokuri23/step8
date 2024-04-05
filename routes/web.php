@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,9 +43,13 @@ Route::get('/show/{id}', [ProductController::class, 'show'])->name('show');
 // 更新
 Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
 // 削除
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('delete');
+Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('delete');
 // 検索
-Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::GET('/search', [ProductController::class, 'search'])->name('search');
+// 購入
+Route::get('/cart/{id}', [ProductController::class, 'cart'])->name('cart');
+Route::post('/purchase/{id}', [ProductController::class, 'purchase'])->name('purchase');
+
 
 
 require __DIR__ . '/auth.php';
