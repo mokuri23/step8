@@ -9,6 +9,7 @@ use App\Models\Sale;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -142,20 +143,23 @@ class ProductController extends Controller
      */
 
     //  削除
+
     public function destroy($id)
     {
         DB::beginTransaction();
 
         try {
-            $model = new Product();
-            $product = $model->deleteProduct($id);
+            Product::find($id)->sales()->delete();
+            Product::find($id)->delete();
             DB::commit();
             return response()->json([
-                'message' => config('message.delete_success')
+                'message' => '商品が削除されました。'
             ]);
         } catch (\Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
             return response()->json([
-                'message' => config('message.delete_fail')
+                'message' => '商品の削除に失敗しました。'
             ]);
         }
     }
@@ -179,12 +183,10 @@ class ProductController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['error' => '検索中にエラーが発生しました。']);
-            // return back();
+            return back();
         }
 
-
-        return response()->json(['$products' => $products, 'companies' => $companies]);
+        return response()->json($products);
     }
 
     // 購入

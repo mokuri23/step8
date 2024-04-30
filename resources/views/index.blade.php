@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      商品一覧画面
+      <a href="{{ route('index') }}">商品一覧画面</a>
     </h2>
   </x-slot>
 
@@ -22,7 +22,7 @@
       </div>
 
       <!-- 価格フォーム -->
-      <div class="price-range">
+      <div class="box">
         <label class="label">価格</label>
         ￥<input type="text" class="min_price" name="min_price" placeholder="下限価格">〜
         ￥<input type="text" class="max_price" name="max_price" placeholder="上限価格">
@@ -32,7 +32,7 @@
         <input type="text" class="max_stock" name="max_stock" placeholder="上限在庫数">個
 
         <!-- 検索ボタン -->
-        <button type="button" id="search-button" class="search-btn">検索</button>
+        <button type="submit" id="search-button" data-url="{{ route('search') }}">検索</button>
       </div>
     </form>
   </div>
@@ -54,21 +54,21 @@
     <table class="table tablesorter">
       <thead>
         <tr>
-          <th scope="col" class="table-header" data-sort="numeric">商品ID</th>
-          <th scope="col" class="table-header" data-sort="numeric">商品画像</th>
-          <th scope="col" class="table-header" data-sort="numeric">商品名</th>
-          <th scope="col" class="table-header" data-sort="numeric">価格</th>
-          <th scope="col" class="table-header" data-sort="numeric">在庫数</th>
-          <th scope="col" class="table-header" data-sort="numeric">コメント</th>
-          <th scope="col" class="table-header" data-sort="numeric">メーカー名</th>
-          <th scope="col" class="table-header" data-sort="numeric"></th>
-          <th scope="col" class="table-header" data-sort="numeric"></th>
+          <th scope="col" class="table-header">商品ID</th>
+          <th scope="col" class="table-header">商品画像</th>
+          <th scope="col" class="table-header">商品名</th>
+          <th scope="col" class="table-header">価格</th>
+          <th scope="col" class="table-header">在庫数</th>
+          <th scope="col" class="table-header">コメント</th>
+          <th scope="col" class="table-header">メーカー名</th>
+          <th scope="col" class="table-header"></th>
+          <th scope="col" class="table-header"></th>
         </tr>
       </thead>
 
       <tbody>
         @foreach($products as $product)
-        <tr class="table-form" data-id="{{ $product->id }}">
+        <tr class="table-row" data-id="{{ $product->id }}">
           <td class="table-data">{{ $product->id }}</td>
           <td class="table-data">
             <img width="50px" src="{{ asset('storage/image/' . $product->img_path) }}" />
@@ -82,8 +82,8 @@
             <a href="{{ route('show', ['id' => $product->id]) }}" class="btn blue-btn">詳細</a>
             <form class="del-form" method="post" action="{{ route('delete',['id' => $product->id]) }}">
               @csrf
-              <!-- @method('DELETE') -->
-              <button data-id="{{ $product->id }}" type="submit" class="btn create-btn">削除</button>
+              @method('DELETE')
+              <button data-id="{{ $product->id }}" type="submit" class="link-btn del-btn">削除</button>
             </form>
           </td>
           <td>

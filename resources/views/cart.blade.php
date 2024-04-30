@@ -21,7 +21,7 @@
           @if ($product->stock > 0)
           <input type="number" name="quantity" min="1">
           <button class="purchase-btn" type="submit">購入する</button>
-          <!-- <button class="purchase-btn" type="submit" data-product-id="{{ $product->id }}">購入へ</button> -->
+          <!-- <button class="purchase-btn" type="submit" data-product-id="{{ $product->id }}">購入する</button> -->
           @else
           <p>※在庫がありません</p>
           @endif

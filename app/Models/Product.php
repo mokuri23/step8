@@ -126,6 +126,6 @@ class Product extends Model
             $products->where('products.stock', '<=', $max_stock);
         }
 
-        return $products->paginate(10);
+        return $products;
     }
 }

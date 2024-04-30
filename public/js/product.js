@@ -6,7 +6,7 @@ $(function(){
 
 // 削除　
 $(function(){
-  $('.table').on('click', '.del-form', function(e){
+  $('.table').on('submit', '.del-form', function(e){
     e.preventDefault();
     let deleteConfirm = confirm('削除してよろしいでしょうか？');
 
@@ -20,9 +20,10 @@ $(function(){
           'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
         },
         type: 'POST',
-        url: '/delete/' + userId,
+        url: 'delete/' + userId,
         data: {
-          id: userId
+          id: userId,
+          '_method': 'DELETE'
         },
         dataType: 'json'
       })
@@ -48,20 +49,19 @@ function showMessage(message) {
   messageBox.show();
 }
 
+
+
 // 検索
 $(function(){
-  // console.log("This code is executed.");
-
-  $(document).on('click', '#search-button', function(e){
+  // var csrfToken = $('meta[name="csrf-token"]').attr('content');
+  $('#search-button').on('click',function(e){
     e.preventDefault();
-    let formData = $('#search').serialize();
-    let html = '';
-    // let $company = $('.select-box').val();
-    // let $keyword = $('.keyword-box').val();
-    // let $min_price = $('.min_price').val();
-    // let $max_price = $('.max_price').val();
-    // let $min_stock = $('.min_stock').val();
-    // let $max_stock = $('.max_stock').val();
+    let $company = $('.select-box').val();
+    let $keyword = $('.keyword-box').val();
+    let $min_price = $('.min_price').val();
+    let $max_price = $('.max_price').val();
+    let $min_stock = $('.min_stock').val();
+    let $max_stock = $('.max_stock').val();
 
     $.ajax({
       headers: {
@@ -69,16 +69,22 @@ $(function(){
       },
       url: '/search',
       type: 'GET',
-      data: formData,
+      data: {
+        // _token: csrfToken,
+        "keyword": $keyword,
+        "company": $company,
+        "min_price": $min_price,
+        "max_price": $max_price,
+        "min_stock": $min_stock,
+        "max_stock": $max_stock,
+      },
       dataType: 'json',
-      }).done(function(products){
-        console.log('success');
-        let table = $('table tbody');
-        table.empty();
-        let html = '';
 
-      if (products && products.data && products.data.length) {
-
+    }).done(function(products){
+      console.log('success');
+      let table = $('.table tbody');
+      table.empty();
+      let html = '';
         for(let i = 0; i < products.data.length; i++){
           let id = products.data[i].id;
           let img_path = products.data[i].img_path;
@@ -86,8 +92,7 @@ $(function(){
           let price = products.data[i].price;
           let stock = products.data[i].stock;
           let company = products.data[i].company_name;
-          let html = '';
-          html += `
+          html = `
           <tr class="table-form">
             <td class="table-data">${id}</td>
             <td class="table-data"><img width="50px" src="http://localhost/storage/image/${img_path}"></td>
@@ -96,25 +101,18 @@ $(function(){
             <td class="table-data">${stock}</td>
             <td class="table-data">${company}</td>
             <td class="table-data"><a class="line-btn" href="/show/${id}">詳細</a>
-              <form class="del-form" method="post" action="/delete/${id}">
-                @csrf
-                @method('DELETE')
-                <button data-id="{$id}" type="submit" class="link-btn del-btn">削除</button>
+              <form class="del-form" method="post" action="{{ route('delete',['id' => $product->id]) }}">
+                <button data-id="{{ $product->id }}" type="submit" class="link-btn del-btn">削除</button>
               </form>
             </td>
-            <td class="table-id">
-              <a class="btn" href="/cart/${id}">購入する</a>
-            </td>
+            <td class="table data"><a class="btn" href="/cart/${id}">購入する</a></td>
           </tr>
           `;
           table.append(html);
         }
-      } else {
-        console.error("No data available");
-      }
     }).fail(function(error){
       console.log("fail", error);
-    })
+    });
   });
 });
 

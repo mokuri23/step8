@@ -132,6 +132,19 @@ td .img {
   align-items: center;
 }
 
+.del-btn {
+  width: 80px;
+  background-color: #d65454 !important;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .blue-btn:hover {
   background-color: #32729b;
 }

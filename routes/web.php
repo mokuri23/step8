@@ -45,7 +45,7 @@ Route::post('/update/{id}', [ProductController::class, 'update'])->name('update'
 // 削除
 Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('delete');
 // 検索
-Route::GET('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 // 購入
 Route::get('/cart/{id}', [ProductController::class, 'cart'])->name('cart');
 Route::post('/purchase/{id}', [ProductController::class, 'purchase'])->name('purchase');
