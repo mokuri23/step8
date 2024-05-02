@@ -62,23 +62,9 @@ td .img {
   align-items: center;
 }
 
-/* ボタンレイアウト */
-/* .red-btn {
-  width: 80px;
-  background-color: #da4a4a !important;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 3px;
+.label {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
-
-.red-btn:hover {
-  background-color: #e71c1c;
-} */
 
 .search-btn {
   height: 42px;
@@ -91,7 +77,8 @@ td .img {
 }
 
 .new-create-btn {
-  width: 80px;
+  width: 100px;
+  height: 40px;
   background-color: #57ce7d !important;
   color: #fff;
   border: none;
@@ -121,6 +108,7 @@ td .img {
 
 .blue-btn {
   width: 80px;
+  margin-bottom: 5px;
   background-color: #438ec7 !important;
   color: #fff;
   border: none;
@@ -140,7 +128,19 @@ td .img {
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 3px;
-  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-button {
+  width: 80px;
+  background-color: #aaacac !important;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-left: 10px;
   justify-content: center;
   align-items: center;
 }

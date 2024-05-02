@@ -36,7 +36,7 @@ $(function(){
         }
       })
       .fail(function(error){
-        console.log('fail');
+        console.log('fail', error);
       });
     }
   });
@@ -67,7 +67,7 @@ $(function(){
       headers: {
         'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
       },
-      url: '/search',
+      url: 'search',
       type: 'GET',
       data: {
         // _token: csrfToken,
@@ -95,12 +95,12 @@ $(function(){
           html = `
           <tr class="table-form">
             <td class="table-data">${id}</td>
-            <td class="table-data"><img width="50px" src="http://localhost/storage/image/${img_path}"></td>
+            <td class="table-data"><img width="50px" src="http://localhost:8888/step8/public/storage/image/${img_path}"></td>
             <td class="table-data">${name}</td>
             <td class="table-data">${price}</td>
             <td class="table-data">${stock}</td>
             <td class="table-data">${company}</td>
-            <td class="table-data"><a class="line-btn" href="/show/${id}">詳細</a>
+            <td class="table-data"><a class="btn blue-btn" href="/show/${id}">詳細</a>
               <form class="del-form" method="post" action="{{ route('delete',['id' => $product->id]) }}">
                 <button data-id="{{ $product->id }}" type="submit" class="link-btn del-btn">削除</button>
               </form>

@@ -17,28 +17,28 @@
           @endforeach
         </select>
 
-        <label class="label">キーワード</label>
+        <label class="keyword-label">キーワード</label>
         <input type="text" class="keyword-box" name="keyword" id="keyword" placeholder="Type to Search">
       </div>
 
       <!-- 価格フォーム -->
       <div class="box">
         <label class="label">価格</label>
-        ￥<input type="text" class="min_price" name="min_price" placeholder="下限価格">〜
-        ￥<input type="text" class="max_price" name="max_price" placeholder="上限価格">
+        <input type="text" class="min_price" name="min_price" placeholder="下限価格"> 円〜
+        <input type="text" class="max_price" name="max_price" placeholder="上限価格"> 円
         <!-- 在庫フォーム -->
         <label class="label">在庫数</label>
-        <input type="text" class="min_stock" name="min_stock" placeholder="下限在庫数">個〜
-        <input type="text" class="max_stock" name="max_stock" placeholder="上限在庫数">個
+        <input type="text" class="min_stock" name="min_stock" placeholder="下限在庫数"> 個〜
+        <input type="text" class="max_stock" name="max_stock" placeholder="上限在庫数"> 個
 
         <!-- 検索ボタン -->
-        <button type="submit" id="search-button" data-url="{{ route('search') }}">検索</button>
+        <button class="search-button" type="submit" id="search-button" data-url="{{ route('search') }}">検索</button>
       </div>
     </form>
   </div>
   <!-- 新規登録ボタン -->
   <div class="container" id="message-box">
-    <button onclick="location.href='./create'" class="btn new-create-btn">登録</button>
+    <button onclick="location.href='./create'" class="btn new-create-btn">新規登録</button>
     @if(session('success'))
     <div class="alert alert-success">
       {{ session('success') }}
@@ -68,7 +68,7 @@
 
       <tbody>
         @foreach($products as $product)
-        <tr class="table-row" data-id="{{ $product->id }}">
+        <tr class="table-form" data-id="{{ $product->id }}">
           <td class="table-data">{{ $product->id }}</td>
           <td class="table-data">
             <img width="50px" src="{{ asset('storage/image/' . $product->img_path) }}" />

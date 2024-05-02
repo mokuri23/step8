@@ -126,6 +126,7 @@ class Product extends Model
             $products->where('products.stock', '<=', $max_stock);
         }
 
-        return $products;
+        $result = $products->get();
+        return $result;
     }
 }

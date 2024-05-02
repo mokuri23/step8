@@ -143,26 +143,24 @@ class ProductController extends Controller
      */
 
     //  削除
-
     public function destroy($id)
     {
         DB::beginTransaction();
 
         try {
-            Product::find($id)->sales()->delete();
-            Product::find($id)->delete();
+            $model = new Product();
+            $product = $model->deleteProduct($id);
             DB::commit();
             return response()->json([
-                'message' => '商品が削除されました。'
+                'message' => config('message.delete_success')
             ]);
         } catch (\Exception $e) {
-            DB::rollback();
-            Log::error($e->getMessage());
             return response()->json([
-                'message' => '商品の削除に失敗しました。'
+                'message' => config('message.delete_fail')
             ]);
         }
     }
+
 
     // 検索
     public function search(Request $request)
@@ -186,7 +184,7 @@ class ProductController extends Controller
             return back();
         }
 
-        return response()->json($products);
+        return response()->json(['data' => $products]);
     }
 
     // 購入
