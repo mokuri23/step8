@@ -11,7 +11,7 @@ $(function(){
     let deleteConfirm = confirm('削除してよろしいでしょうか？');
 
     if(deleteConfirm === true) {
-      let form = $(this);
+      let form = $(this)
       let userId = form.find('.del-btn').attr('data-id');
       let row = form.closest('.table-row');
 
@@ -28,15 +28,11 @@ $(function(){
         dataType: 'json'
       })
       .done(function(data){
-        if (data && data.message) {
-          row.hide();
+        form.parents('tr').remove();
         showMessage(data.message);
-        } else {
-          console.log('Invalid response form serve');
-        }
       })
       .fail(function(error){
-        console.log('fail', error);
+        console.log('fail',error);
       });
     }
   });
