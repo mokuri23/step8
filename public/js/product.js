@@ -105,6 +105,7 @@ $(function(){
           </tr>
           `;
           table.append(html);
+          $('.table').trigger("update");
         }
     }).fail(function(error){
       console.log("fail", error);
