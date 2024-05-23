@@ -20,13 +20,13 @@ class Sale extends Model
         return $this->belongsTo(Product::class);
     }
 
-    // public function detail($id)
-    // {
-    //     $products = DB::table('products')
-    //         ->where('id', $id)
-    //         ->first();
-    //     return $products;
-    // }
+    public function detail($id)
+    {
+        $products = DB::table('products')
+            ->where('id', $id)
+            ->first();
+        return $products;
+    }
 
 
 
