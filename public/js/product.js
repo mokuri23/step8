@@ -96,12 +96,12 @@ $(function(){
             <td class="table-data">${price}</td>
             <td class="table-data">${stock}</td>
             <td class="table-data">${company}</td>
-            <td class="table-data"><a class="btn blue-btn" href="/show/${id}">詳細</a>
-              <form class="del-form" method="post" action="{{ route('delete',['id' => $product->id]) }}">
-                <button data-id="{{ $product->id }}" type="submit" class="link-btn del-btn">削除</button>
+            <td class="table-data"><a class="btn blue-btn" href="/step8/public/show/${id}">詳細</a>
+              <form class="del-form" method="post" action="/step8/public/delete/${id}">
+                <button data-id="${id}" type="submit" data-url="step8/public/delete/${id}" class="link-btn del-btn">削除</button>
               </form>
             </td>
-            <td class="table data"><a class="btn" href="/cart/${id}">購入する</a></td>
+            <td class="table data"><a class="btn" href="/step8/public/cart/${id}">購入する</a></td>
           </tr>
           `;
           table.append(html);
